@@ -1,0 +1,13 @@
+{
+  "$schema": "https://deno.land/x/denon@2.4.7/schema.json",
+  "scripts": {
+    "lint": {
+      "cmd": "deno lint --unstable",
+      "desc": "Lint code"
+    },
+    "fmt": {
+      "cmd": "dprint fmt",
+      "desc": "Format code"
+    }
+  }
+}
