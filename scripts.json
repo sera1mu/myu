@@ -3,11 +3,13 @@
   "scripts": {
     "lint": {
       "cmd": "deno lint --unstable",
-      "desc": "Lint code"
+      "desc": "Lint code",
+      "watch": false
     },
     "fmt": {
       "cmd": "dprint fmt",
-      "desc": "Format code"
+      "desc": "Format code",
+      "watch": false
     }
   }
 }
