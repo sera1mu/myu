@@ -52,7 +52,6 @@ const fetcher = async function (
 
 Deno.test('GitHub API: Check created URL correctly', () => {
   const result = createRepoUrl(
-    'https://api.github.com',
     'denoland',
     'deno',
     'tags',
@@ -68,7 +67,6 @@ Deno.test('GitHub API: Check got repository tags correctly', async () => {
   };
 
   const tags = await getRepoTags(
-    'https://api.github.com',
     'denoland',
     'deno',
     fetcher,
@@ -108,7 +106,6 @@ Deno.test('GitHub API: Check throwed error when error code is invalid', () => {
   assertThrowsAsync(
     async () => {
       await getRepoTags(
-        'https://api.github.com',
         'denoland',
         'deno',
         fetcher,
