@@ -10,6 +10,33 @@
       "cmd": "dprint fmt",
       "desc": "Format code",
       "watch": false
+    },
+    "exec": {
+      "cmd": "deno run ./myu.ts",
+      "desc": "Run project without build",
+      "watch": false,
+      "importmap": "deps.json",
+      "allow": {
+        "env": true,
+        "net": "api.github.com"
+      }
+    },
+    "build": {
+      "cmd": "deno compile --lite ./myu.ts",
+      "desc": "Build project",
+      "watch": false,
+      "importmap": "deps.json",
+      "unstable": true,
+      "allow": {
+        "env": true,
+        "net": "api.github.com"
+      }
+    },
+    "test": {
+      "cmd": "deno test",
+      "desc": "Run test",
+      "watch": false,
+      "importmap": "deps.dev.json"
     }
   }
 }
