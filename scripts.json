@@ -11,6 +11,11 @@
       "desc": "Format code",
       "watch": false
     },
+    "fmt:check": {
+      "cmd": "dprint fmt:check",
+      "desc": "Check code formatted",
+      "watch": false
+    },
     "exec": {
       "cmd": "deno run ./myu.ts",
       "desc": "Run project without build",
