@@ -7,6 +7,7 @@ const encoder = new TextEncoder();
 
 const originalConsoleLog = console.log;
 
+// deno-lint-ignore no-explicit-any
 console.log = function (...data: any[]): void {
   logs.push(data[0]);
   originalConsoleLog(data[0]);
