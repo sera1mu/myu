@@ -5,9 +5,11 @@ let logs: string[] = [];
 
 const encoder = new TextEncoder();
 
+const originalConsoleLog = console.log;
+
 console.log = function (...data: any[]): void {
   logs.push(data[0]);
-  Deno.stdout.writeSync(encoder.encode(`${data[0]}\n`));
+  originalConsoleLog(data[0]);
 };
 
 Deno.test('Logger: Check outputed correctly when not verbose', () => {
