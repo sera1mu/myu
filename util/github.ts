@@ -78,6 +78,7 @@ export const getRepoTags = async function getRepositoryTagsFromGitHubAPI(
 > {
   let response!: Response;
 
+  // Fetch from GitHub API
   try {
     const url = createRepoUrl(origin, owner, repo, 'tags');
     if (fetcher == undefined) {
@@ -89,6 +90,7 @@ export const getRepoTags = async function getRepositoryTagsFromGitHubAPI(
     throw new Error(`Failed to fetch repository tags: ${err}`);
   }
 
+  // Throw error when response status was not 200
   if (response.status !== 200) {
     throw new Error(
       `Failed to fetch repository tags: ${response.status} ${response.statusText}`,
