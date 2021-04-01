@@ -6,6 +6,7 @@ let responseStatus = {
   text: 'OK',
 };
 
+// deno-lint-ignore require-await
 const fetcher = async function (
   input: string | Request | URL,
   init?: RequestInit | undefined,
@@ -98,7 +99,7 @@ Deno.test('GitHub API: Check got repository tags correctly', async () => {
   ], tags);
 });
 
-Deno.test('GitHub API: Check throwed error when error code is invalid', async () => {
+Deno.test('GitHub API: Check throwed error when error code is invalid', () => {
   responseStatus = {
     code: 404,
     text: 'Not Found',
