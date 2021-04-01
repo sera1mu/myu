@@ -2,7 +2,7 @@
   "imports": {
     "cliffy": "https://deno.land/x/cliffy@v0.18.1/command/mod.ts",
     "colors": "https://deno.land/std@0.91.0/fmt/colors.ts",
-    "octokit": "https://esm.sh/@octokit/rest@18.5.2",
+    "octokit": "https://esm.sh/@octokit/request@5.4.14",
     "asserts": "https://deno.land/std@0.91.0/testing/asserts.ts"
   }
 }
