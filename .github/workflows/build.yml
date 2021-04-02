@@ -31,6 +31,12 @@ jobs:
       - name: Run build
         run: denon build
 
+      - name: Upload artifact (Windows)
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact-${{ matrix.os }}-${{ matrix.deno }}
+          path: ./myu.exe
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
