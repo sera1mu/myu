@@ -1,9 +1,15 @@
 import { assertEquals, assertThrowsAsync } from 'asserts';
 import { createRepoUrl, getRepoTags } from '../util/github.ts';
 
-let responseStatus = {
-  code: 200,
-  text: 'OK',
+let responseReturns = {
+  status: {
+    code: 200,
+    text: 'OK',
+  },
+  error: {
+    throw: false,
+    message: 'This is example error!',
+  },
 };
 
 // deno-lint-ignore require-await
@@ -44,9 +50,13 @@ const fetchMock = async function (
     },
   ]);
 
+  if (responseReturns.error.throw) {
+    throw new Error(responseReturns.error.message);
+  }
+
   return new Response(content, {
-    status: responseStatus.code,
-    statusText: responseStatus.text,
+    status: responseReturns.status.code,
+    statusText: responseReturns.status.text,
   });
 };
 
@@ -74,7 +84,7 @@ Deno.test('GitHub API: Check created URL correctly #2', () => {
 });
 
 Deno.test('GitHub API: Check got repository tags correctly', async () => {
-  responseStatus = {
+  responseReturns.status = {
     code: 200,
     text: 'OK',
   };
@@ -112,7 +122,7 @@ Deno.test('GitHub API: Check got repository tags correctly', async () => {
 });
 
 Deno.test('GitHub API: Check throwed error when error code is invalid', () => {
-  responseStatus = {
+  responseReturns.status = {
     code: 404,
     text: 'Not Found',
   };
@@ -128,5 +138,22 @@ Deno.test('GitHub API: Check throwed error when error code is invalid', () => {
     },
     undefined,
     'Failed to fetch repository tags: 404 Not Found',
+  );
+});
+
+Deno.test('GitHub API: Check throwed error when failed to fetch(Not Status Error)', () => {
+  responseReturns.error.throw = true;
+
+  window.fetch = fetchMock;
+
+  assertThrowsAsync(
+    async () => {
+      await getRepoTags(
+        'denoland',
+        'deno',
+      );
+    },
+    undefined,
+    'Failed to fetch repository tags: Error: This is example error!',
   );
 });
