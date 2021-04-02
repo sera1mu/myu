@@ -1,7 +1,7 @@
 import { assertEquals, assertThrowsAsync } from 'asserts';
 import { createRepoUrl, getRepoTags } from '../util/github.ts';
 
-let responseReturns = {
+const responseReturns = {
   status: {
     code: 200,
     text: 'OK',
