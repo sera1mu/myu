@@ -33,12 +33,14 @@ jobs:
 
       - name: Upload artifact (Windows)
         uses: actions/upload-artifact@v2
+        if: ${{ matrix.os == 'windows-latest' }}
         with:
           name: build-artifact-${{ matrix.os }}-${{ matrix.deno }}
           path: ./myu.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
+        if: ${{ matrix.os != 'windows-latest' }}
         with:
           name: build-artifact-${{ matrix.os }}-${{ matrix.deno }}
           path: ./myu
