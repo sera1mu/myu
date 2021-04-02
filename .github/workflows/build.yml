@@ -34,5 +34,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: build-artifact-${{ matrix.os }}
+          name: build-artifact-${{ matrix.os }}-${{ matrix.deno }}
           path: ./myu
