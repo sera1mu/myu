@@ -1,64 +1,6 @@
 import { assertEquals, assertThrowsAsync } from 'asserts';
 import { createRepoUrl, getRepoTags } from '../util/github.ts';
-
-const responseReturns = {
-  status: {
-    code: 200,
-    text: 'OK',
-  },
-  error: {
-    throw: false,
-    message: 'This is example error!',
-  },
-};
-
-// deno-lint-ignore require-await
-const fetchMock = async function (
-  _input: string | Request | URL,
-  _init?: RequestInit | undefined,
-): Promise<Response> {
-  const content = JSON.stringify([
-    {
-      name: 'v1.0.0',
-      commit: {
-        sha: 'thisIsMock',
-        url: 'thisIsMock',
-      },
-      zipball_url: 'thisIsMock',
-      tarball_url: 'thisIsMock',
-      node_id: 'thisIsMock',
-    },
-    {
-      name: 'v1.1.0',
-      commit: {
-        sha: 'thisIsMock',
-        url: 'thisIsMock',
-      },
-      zipball_url: 'thisIsMock',
-      tarball_url: 'thisIsMock',
-      node_id: 'thisIsMock',
-    },
-    {
-      name: 'v1.1.2',
-      commit: {
-        sha: 'thisIsMock',
-        url: 'thisIsMock',
-      },
-      zipball_url: 'thisIsMock',
-      tarball_url: 'thisIsMock',
-      node_id: 'thisIsMock',
-    },
-  ]);
-
-  if (responseReturns.error.throw) {
-    throw new Error(responseReturns.error.message);
-  }
-
-  return new Response(content, {
-    status: responseReturns.status.code,
-    statusText: responseReturns.status.text,
-  });
-};
+import { fetchMocks } from './fetchMocks.ts';
 
 Deno.test('GitHub API: Check created URL correctly', () => {
   const result = createRepoUrl(
@@ -84,12 +26,7 @@ Deno.test('GitHub API: Check created URL correctly #2', () => {
 });
 
 Deno.test('GitHub API: Check got repository tags correctly', async () => {
-  responseReturns.status = {
-    code: 200,
-    text: 'OK',
-  };
-
-  window.fetch = fetchMock;
+  window.fetch = fetchMocks.success;
 
   const tags = await getRepoTags(
     'denoland',
@@ -122,12 +59,7 @@ Deno.test('GitHub API: Check got repository tags correctly', async () => {
 });
 
 Deno.test('GitHub API: Check throwed error when error code is invalid', () => {
-  responseReturns.status = {
-    code: 404,
-    text: 'Not Found',
-  };
-
-  window.fetch = fetchMock;
+  window.fetch = fetchMocks.notFound;
 
   assertThrowsAsync(
     async () => {
@@ -142,9 +74,7 @@ Deno.test('GitHub API: Check throwed error when error code is invalid', () => {
 });
 
 Deno.test('GitHub API: Check throwed error when failed to fetch(Not Status Error)', () => {
-  responseReturns.error.throw = true;
-
-  window.fetch = fetchMock;
+  window.fetch = fetchMocks.throws;
 
   assertThrowsAsync(
     async () => {
