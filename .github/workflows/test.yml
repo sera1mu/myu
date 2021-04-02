@@ -29,7 +29,8 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      deno: ["v1.x", "nightly"]
+      matrix:
+        deno: ["v1.x", "nightly"]
 
     steps:
       - name: Setup repo
@@ -50,8 +51,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-      deno: ["v1.x", "nightly"]
-      os: [macOS-latest, windows-latest, ubuntu-latest]
+      matrix:
+        deno: ["v1.x", "nightly"]
+        os: [macOS-latest, windows-latest, ubuntu-latest]
 
     steps:
       - name: Setup repo
@@ -60,7 +62,7 @@ jobs:
       - name: Setup Deno
         uses: denolib/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: ${{ matrix.deno }}
 
       - name: Setup Denon
         run: deno install -qAf --unstable https://deno.land/x/denon@2.4.7/denon.ts
