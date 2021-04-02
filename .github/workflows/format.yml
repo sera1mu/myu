@@ -23,4 +23,4 @@ jobs:
         run: curl -fsSL https://dprint.dev/install.sh | sh
 
       - name: Check format
-        run: dprint check
+        run: ~/.dprint/bin/dprint check
