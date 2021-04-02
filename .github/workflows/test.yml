@@ -18,6 +18,7 @@ jobs:
         uses: denolib/setup-deno@v2
         with:
           deno-version: v1.x
+        run: deno install -qAf --unstable https://deno.land/x/denon@2.4.7/denon.ts
 
       - name: Run test
-        run: deno test --import-map deps.dev.json
+        run: denon test
