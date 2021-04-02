@@ -19,9 +19,6 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Setup Denon
-        run: deno install -qAf --unstable https://deno.land/x/denon@2.4.7/denon.ts
-
       - name: Setup dprint
         run: curl -fsSL https://dprint.dev/install.sh | sh
 
