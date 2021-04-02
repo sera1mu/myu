@@ -68,4 +68,13 @@ jobs:
         run: deno install -qAf --unstable https://deno.land/x/denon@2.4.7/denon.ts
 
       - name: Run test
-        run: denon test
+        run: denon test --coverage=cov --unstable
+
+      - name: Generate lcov
+        run: deno coverage --unstable --lcov ./cov > cov.lcov
+
+      - name: Report coverage
+        uses: codecov/codecov-action@v1
+        with:
+          name: ${{ matrix.os }}-${{ matrix.deno }}
+          files: cov.lcov
