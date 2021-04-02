@@ -1,4 +1,4 @@
-import { GITHUB_API_ORIGIN } from './constants.ts';
+import { GITHUB_API_BASE } from './constants.ts';
 
 /**
  * Create GitHub API's repository URL
@@ -13,7 +13,7 @@ export const createRepoUrl = function createGitHubAPIRepositoryUrl(
   repo: string,
   params: string,
 ): string {
-  const url = `${GITHUB_API_ORIGIN}/repos/${owner}/${repo}/${params}`;
+  const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/${params}`;
   return url;
 };
 
@@ -69,10 +69,6 @@ export interface RepositoryTag {
 export const getRepoTags = async function getRepositoryTagsFromGitHubAPI(
   owner: string,
   repo: string,
-  fetcher?: (
-    input: string | Request | URL,
-    init?: RequestInit | undefined,
-  ) => Promise<Response>,
 ): Promise<
   RepositoryTag[]
 > {
@@ -81,11 +77,7 @@ export const getRepoTags = async function getRepositoryTagsFromGitHubAPI(
   // Fetch from GitHub API
   try {
     const url = createRepoUrl(owner, repo, 'tags');
-    if (fetcher == undefined) {
-      response = await fetch(url);
-    } else {
-      response = await fetcher(url);
-    }
+    response = await window.fetch(url);
   } catch (err) {
     throw new Error(`Failed to fetch repository tags: ${err}`);
   }
