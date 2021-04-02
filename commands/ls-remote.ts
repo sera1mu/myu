@@ -2,7 +2,7 @@ import { Command } from 'cliffy';
 import {
   DENO_REPO_NAME,
   DENO_REPO_OWNER,
-  GITHUB_API_ORIGIN,
+  GITHUB_API_BASE,
 } from '../util/constants.ts';
 import { getRepoTags } from '../util/github.ts';
 import { Logger } from '../util/Logger.ts';
@@ -27,7 +27,6 @@ export class ListRemoteCommand extends Command {
   async run(): Promise<void> {
     try {
       const tags = await getRepoTags(
-        GITHUB_API_ORIGIN,
         DENO_REPO_OWNER,
         DENO_REPO_NAME,
       );
