@@ -6,6 +6,6 @@
 
 [![Test](https://github.com/sera1mu/myu/actions/workflows/test.yml/badge.svg)](https://github.com/sera1mu/myu/actions/workflows/test.yml)
 
-[![License](https://img.shields.io/github/license/sera1mu/myu?style=flat-square)](https://github.com/sera1mu/myu/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/sera1mu/myu)](https://github.com/sera1mu/myu/blob/main/LICENSE)
 
 Myu is a simple version manager for Deno.
