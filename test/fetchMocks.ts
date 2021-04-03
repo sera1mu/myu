@@ -1,4 +1,5 @@
 export const fetchMocks = {
+  // deno-lint-ignore require-await
   success: async function (
     _input: string | Request | URL,
     _init?: RequestInit | undefined,
@@ -41,6 +42,7 @@ export const fetchMocks = {
       statusText: 'OK',
     });
   },
+  // deno-lint-ignore require-await
   notFound: async function (
     _input: string | Request | URL,
     _init?: RequestInit | undefined,
@@ -83,6 +85,7 @@ export const fetchMocks = {
       statusText: 'Not Found',
     });
   },
+  // deno-lint-ignore require-await
   throws: async function (
     _input: string | Request | URL,
     _init?: RequestInit | undefined,
