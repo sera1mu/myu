@@ -26,7 +26,7 @@ Deno.test('GitHub API: Check created URL correctly #2', () => {
 });
 
 Deno.test('GitHub API: Check got repository tags correctly', async () => {
-  window.fetch = fetchMocks.success;
+  window.fetch = fetchMocks.successTags;
 
   const tags = await getRepoTags(
     'denoland',
@@ -85,5 +85,20 @@ Deno.test('GitHub API: Check throwed error when failed to fetch(Not Status Error
     },
     undefined,
     'Failed to fetch repository tags: Error: This is example error!',
+  );
+});
+
+Deno.test('GitHub API: Check throwed error when response body JSON incorrect', () => {
+  window.fetch = fetchMocks.incorrectJSON;
+
+  assertThrowsAsync(
+    async () => {
+      await getRepoTags(
+        'denoland',
+        'deno',
+      );
+    },
+    undefined,
+    'Failed to parse repository tags:',
   );
 });

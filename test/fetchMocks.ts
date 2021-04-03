@@ -1,6 +1,6 @@
 export const fetchMocks = {
   // deno-lint-ignore require-await
-  success: async function (
+  successTags: async function (
     _input: string | Request | URL,
     _init?: RequestInit | undefined,
   ): Promise<Response> {
@@ -90,39 +90,18 @@ export const fetchMocks = {
     _input: string | Request | URL,
     _init?: RequestInit | undefined,
   ): Promise<Response> {
-    const content = JSON.stringify([
-      {
-        name: 'v1.0.0',
-        commit: {
-          sha: 'thisIsMock',
-          url: 'thisIsMock',
-        },
-        zipball_url: 'thisIsMock',
-        tarball_url: 'thisIsMock',
-        node_id: 'thisIsMock',
-      },
-      {
-        name: 'v1.1.0',
-        commit: {
-          sha: 'thisIsMock',
-          url: 'thisIsMock',
-        },
-        zipball_url: 'thisIsMock',
-        tarball_url: 'thisIsMock',
-        node_id: 'thisIsMock',
-      },
-      {
-        name: 'v1.1.2',
-        commit: {
-          sha: 'thisIsMock',
-          url: 'thisIsMock',
-        },
-        zipball_url: 'thisIsMock',
-        tarball_url: 'thisIsMock',
-        node_id: 'thisIsMock',
-      },
-    ]);
-
     throw new Error('This is example error!');
+  },
+  // deno-lint-ignore require-await
+  incorrectJSON: async function (
+    _input: string | Request | URL,
+    _init?: RequestInit | undefined,
+  ): Promise<Response> {
+    const incorrectJSON = '{ incorrect: [[[[ json ] }';
+
+    return new Response(incorrectJSON, {
+      status: 200,
+      statusText: 'OK',
+    });
   },
 };
